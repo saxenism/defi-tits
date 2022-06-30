@@ -154,3 +154,49 @@ Regression testing is the process of testing the modified parts of the code and 
 + Select modification traversing test cases (Huge upfront work required to identify these test cases)
 + Select higher priority test cases (Assign priority values to all your tests, then re-test all your highest priority tests)
 
+## 5. STLC (Software Testing Life Cycle)
+
++ Requirement Analysis (Truly truly understand what your protocol is supposed to do)
++ Test Planning / Strategy Phase (Based on the context of the protocol in question, zero in on a testing strategy)
++ Test Case Development (This should take the maximum amout of time. List down all test cases that you think are appropriate.)
++ Environment Setup (Independent of other stages) (Don't tell me you don't already have Forge installed)
++ Test Execution (Code up all the test cases you came up with earlier. You can do back and forth between Test Execution and Case Development phase, but try to keep it minimal)
++ Test Cycle Closure (Create a good report. Remember, chads keep their work presentable)
+
+## 6. Non Functional Testing
+
++ This is based on customer expectations as opposed to functional testing which is based on customer requirements.
++ Non functional testing describes how the product works rather that what the product does
++ Includes things like performance testing, scalability, volume testing, load testing, stress testing etc.
+
+## 7. Software Testing Documentation
+
+### 7.1 Test Plan
+
+Provides the outline strategy which will be implemented for testing the application and also the resources that will be required. Test environement will also be described.
+
+Make sure that you also set up a *defect/bug life cycle*
+
+### 7.2 Test Scenario
+
+Notifies the area in which your application will experiment
+
+### 7.3 Test Case
+
+Collected steps and conditions with inputs that can be implemented at the time of testing. 
+
+### 7.4 Traceability Matrix
+
+A table where you can relate test case IDs with protocol requirement IDs. 
+
+## 8. Defect Management Process (What to do when you find bugs)
+
++ Detect the defect
++ Formulate the bug report
++ Fix bug
++ Bug list creation (so that, yk, history doesn't repeat itself and everyone sees that you have 3 brain cells)
+
+It is important to note in the first two points, whenever you encounter a bug, you have to reach to the root cause of the bug and report that. Because, it is very much possible that the actual coding error that caused the bug might create many more bugs in the future.
+
+In short, treat the root cause and not just the symptoms.
+
