@@ -154,6 +154,20 @@ Testing the entire system. Here, we navigate all the necessary modules of an app
 
 It is a formal testing according to user needs, requirements and business processes conducted to determine whether a system satisfies the acceptance criteria or not and to enable the users, customers or other authorized entities to determine whether to accept the system or not.
 
+##### Smoke Testing or Build Verification Testing
+
++ Subset of acceptance testing
+
+| Smoke Testing | Sanity Testing |
+|----------------|----------------|
+| Smoke testing is done to assure that the acute functionalities of program is working fine. | Sanity testing is done to check the bugs have been fixed after the build. |
+| Smoke testing is documented. | Sanity testing isn’t documented. |
+| Smoke testing is done to measures the stability of the system/product by performing testing. | Sanity testing is done to measures the rationality of the system/product by performing testing. |
+| Smoke testing can be performed either manually or by using automation tools. | Sanity testing is commonly executed manually, not by using any automation approach. |
+| Smoke testing is used to test all over function of the system/product. | Sanity testing is used in the case of only modified or defect functions of system/products. |
+|Smoke testing is performed when new product is built. |Sanity testing is conducted after the completion of regression testing.|
+
+
 #### 4.3.3 Mutation Testing
 
 + Type of white box testing
@@ -174,6 +188,11 @@ This testing tests the following things (among others):
 + Recovery
 + Installation etc
 
+#### 4.3.5 Recovery Testing in Software Testing
+
++ Recovery testing is a type of system testing which aims at testing whether a system can recover from failures or not.
++ To ensure that a system is fault-tolerant and can recover well from failures, recovery testing is important to perform.
+
 ### 4.4 Regression Testing
 
 Regression testing is the process of testing the modified parts of the code and the parts that might get affected due to the modification to ensure that no new errors have been introduced in the software after the modifications have been made.
@@ -191,6 +210,7 @@ Regression testing is the process of testing the modified parts of the code and 
 + Done to ensure that the code changes that have been made are working properly or not
 + Focus of the team during sanity testing is to validate the functionality of the application and not detailed testing
 + Usually performed on builds where the production deployment is required immediately like a critical bug fix.
++ Performed only after the software product has passed the smoke test and the QA team has accepted for further testing
 
 ## 5. STLC (Software Testing Life Cycle)
 
@@ -206,6 +226,54 @@ Regression testing is the process of testing the modified parts of the code and 
 + This is based on customer expectations as opposed to functional testing which is based on customer requirements.
 + Non functional testing describes how the product works rather that what the product does
 + Includes things like performance testing, scalability, volume testing, load testing, stress testing etc.
+
+### 6.1 Performace Testing
+
++ Ensures software application will perform well under their expected workload
++ Goal is not to find bugs but to elimiate performance bottle-necks
++ Provides accurate information about the speed, scalability and stability of the software
++ Types of performance testing types
+    + Load Testing (Multiple users access application simultaneously)
+    + Stress Testing
+    + Endurance Testing
+    + Spiking Testing
+    + Volume & Scalability Testing 
++ Pay attention to:
+    + Long load time
+    + Poor response time
+    + Poor scalability
+    + Bottlenecking
++ Examples of performance Test cases:
+    + Verify response time is not more than 4 seconds when 1000 users access the website simultaneously 
+    + Check the maximum number of users that the application can handle before it crashes
+    + Verify response time of the application under low, normal, moderate and heavy load conditions
+
+### 6.2 Cross browser Tests and Mobile Testing and API Testing
+
+See if this is applicable and test if you have the resources to do so.
+
+Types of API Testing
+
++ Functionality Testing
++ Reliability Testing
++ Load Testing
++ UI/UX Testing
++ Interoperability Testing
++ Security Testing
++ Penetration Testing
++ Negative Testing
+
+## 7. Agile Testing (Test Driven Development (TDD))
+
++ Testing is continuous
++ Continuous Feedback
++ Decreased time of feedback response
++ Less documentation
++ Test Drive
++ Simplified Code
+
+![](https://i.imgur.com/8oKMUr3.png)
+
 
 ## 7. Software Testing Documentation
 
