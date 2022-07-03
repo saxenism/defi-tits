@@ -37,6 +37,37 @@ Just like your hot and caring girlfriend, a 100% bug-free software exists only i
 
 Thank you for coming to my TED talk. Bye.
 
+## Types of testing
+
+Functional and Non Functional
+
+Non Function includes 
+- Testing the Documentation (which includes)
+    - Instructions
+    - Examples
+    - Messages
+    - Samples
+- Installation Testing
+- Performance Testing
+    - Load Testing
+    - Spike Testing
+    - Stress Testing
+    - Endurance Testing
+- Reliability Testing
+    - Feature Testing
+    - Regression testing
+    - Load Test
+    - Objectives Testing
+- Security Testing (web2 stuff)
+    - Access to application
+    - Data Protection
+    - Brute FOrce
+    - SQL Injection
+    - Service Point
+    - Session Management
+    - Error Handling
+    - Specific Risky Functionalities
+
 ## 2. SDLC
 
 + Requirement
@@ -154,6 +185,13 @@ Regression testing is the process of testing the modified parts of the code and 
 + Select modification traversing test cases (Huge upfront work required to identify these test cases)
 + Select higher priority test cases (Assign priority values to all your tests, then re-test all your highest priority tests)
 
+#### 4.4.2 Sanity Testing
+
++ Subset if regression testing
++ Done to ensure that the code changes that have been made are working properly or not
++ Focus of the team during sanity testing is to validate the functionality of the application and not detailed testing
++ Usually performed on builds where the production deployment is required immediately like a critical bug fix.
+
 ## 5. STLC (Software Testing Life Cycle)
 
 + Requirement Analysis (Truly truly understand what your protocol is supposed to do)
@@ -199,4 +237,48 @@ A table where you can relate test case IDs with protocol requirement IDs.
 It is important to note in the first two points, whenever you encounter a bug, you have to reach to the root cause of the bug and report that. Because, it is very much possible that the actual coding error that caused the bug might create many more bugs in the future.
 
 In short, treat the root cause and not just the symptoms.
+
+## 9. When to choose manual testing
+
+### 9.1 Exploratory Testing
+
+Carried out by domain experts.
+Minimal planning
+
+### 9.2 Usability Testing
+
+User friendliness of an app
+
+### 9.3 Ad Hoc Testing
+
+Informal testing.
+No documents are followed.
+
+### 9.4 How to do manual testing
+1. Understand the requirements
+2. Write the test cases
+3. Conducting the tests
+4. Log Good Bug Reports
+5. Report the results (Detailed test report)
+
+## What to automate?
+
++ Repetitive Task
++ Capturing Results
++ Data Entry Tasks
++ Timing or Screening Responsiveness
++ Non functional Testing
++ Environment Setup/Tear down
+
+## Approaches to Test Automation (Look them up)
+
++ Code driven Testing
++ Graphical User Interface
++ Framework Approach
+    + Linear Scripting framework
+    + Data driven framework
+    + Keyword driven framework
+    + Modular testing framework
+    + Hybrid Testing Framework
+
 
