@@ -29,3 +29,36 @@
 + Borrower in case of a loan
 
 11. **Protocol Admin/Global Admin**: Can call only one function, that pauses every outward facing function of the protocol. Called only when things have got really bad.
+
+## Maple Protocol Architecture
+
+The architecture is pretty straightforward. Doesn't need much explaining.
+
+1. There is a Pool Factory, which will create Pools, which will be managed by Pool Delegates. Simple.
++ Each pool will have a Liquidity Locker (created from its factory) to store the pool's liquidity
++ Each pool will have a Debt Locker (created from its factory) to store the debt that is given out from that particular pool
++ Each pool will have a Stake Locker (created from its factory) for the Pool Delegate to stake their MPL-USDC BPT tokens. This is where the stakers would also stake their tokens.
++ Each pool will generate some MPL rewards as a result of this staking and will be distributed among the LPs.
+
+2. Similarly there is a Loan factory, which will be used by Borrowers to create Loan requests(contracts). Simple
++ Each loan will have a Collateral Locker (created from its factory) to store the borrower's collateral
++ Each loan will have a Funding Locker (created from its factory) **which I am not sure why it exists. Probably to store the repaid amount? IDK**
+
+3. Ofcourse Chainlink oracles are being used to fetch prices and execute functions dependent on price action.
+
+![Protocol Architecture](https://user-images.githubusercontent.com/35537333/117036971-fa290000-acd3-11eb-8aa4-188e6dca3a3f.png)
+
+## Security Considerations:
+
+1. Pool Delegates are supposed to be trusted actors. Can't really do anything if they turn out to be malicious.
+2. dapp.tools (HEVM) has been used for extensive unit testing + fuzzing
+> If you know anything James Bach, you'll know that he'll call this checking rather than actual testing. And this is what basically interests us here.
+3. External code audits by Deduab, PeckShield, TrailOfBits, Code4rena.
+4. 2 week internal audit by the Maple team
+> This kind of audit is often susceptible to developer biases. But it is complimented by external audits here... So, shouldn't be much of an issue. Anyway, we are still more interested in testing rather than the auditing and the plethora of audit reports of Maple.
+5. OZ Defender is in use to inform of any emergencies.
+6. Incase of a oracle outage, all transactions requesting asset prices will be reverted. Manual override possible.
+> Hmm interesting claim. Will be fun to check this.
+7. Incase of emergencies, *contract instance admins (local admins)* and/or *protocol admins/global admins* will come into play.
+8. Smart contract logic that is deployed on the mainnet cannot be altered in any way. Fuck proxies.
+> This is good. Significantly reduces the surface area of possible attacks.
