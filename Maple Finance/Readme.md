@@ -70,3 +70,40 @@ If as a LP or staker you want to withdraw your funds, you'll first have to trigg
 In the following image it is not depicted properly, but the Pool Delegate also has to stake a shit ton of BPTs to be whitelisted as a Pool Delegate by the MapleDAO in the first place.
 
 ![Users that can interact with a pool](https://user-images.githubusercontent.com/44272939/108764517-b457fa80-7520-11eb-9f32-73c09c278b92.png)
+
+## Understanding Loanss
+
+1. The Loan contracts are created by *Borrowers* out of the *LoanFactory* contracts, which are whitelisted in **MapleGlobals** to ensure that only certain types of *Loan* contracts are used in the protocol.
+
+2. Loan contracts are used to:
++ Set terms such as:
+    + APR, Payment Interval Length, Term Lenght, Collateral Ratio, Collateral and Borrow asset, etc.
++ Receiving capital from lenders
++ Withdrawing the loan
++ Interest Payments
++ Liquidating Collaterals
+
+3. Important point to note is the use of **Payment Calculators**. These are used to calculate interest payments, late fees, premium fees etc. These are also whitelisted in the `MapleGlobals` to ensure no malicious payment calculators are used.
+
+> At first glance this looks like a whitelisted library which will be used for calculations based on the specifications of the loans, such as simple/compound interest. This also means that no calculation would be happening inside of the Loan contract
+
+> Need to check if these calculation libraries can somehow be tampered with.
+
+4. A Loan can be funded by any number of pools, but those pools must be instantiated from `PoolFactory` contract itself.
+The LPs get LoanFDTs.
+
+> LoanFDTs are similar to LP Tokens as they represent a claim over a part of principal plus any proportional interest that gets generated. 
+
+> LoanFDTs that Maple is using isn't the same old ERC20, they are using a relatively unknown ERC222 standard. Need to check that thoroughly then.
+
+5. Borrowers can drawdown any amount that is both above the request Loan amount, and below the current balance of the `FundingLocker`. 
+
+> The question here is, why would Maple allow lenders to deposit funds in the Loan contract past their `requested` amount? Wouldn't that essentially be wasted amount?
+
+6. At the time of the drawdown:
+    +  a percentage of the drawdown amount is paid to the `MapleTreasury` from the `FundingLocker` as the `treasury fee`.
+    + investor fee is paid to the lenders (a % of the drawdown amount). Sent from `FundingLocker` to the `Loan` to be claimed by the lenders.
+    > Seems a bit off. Investigate again.
+    + Drawdown minus fee is transferred to the Borrower
+
+7. Excess funds are sent to `Loan` contract to be claimed by the lenders. 
