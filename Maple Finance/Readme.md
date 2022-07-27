@@ -62,3 +62,11 @@ The architecture is pretty straightforward. Doesn't need much explaining.
 7. Incase of emergencies, *contract instance admins (local admins)* and/or *protocol admins/global admins* will come into play.
 8. Smart contract logic that is deployed on the mainnet cannot be altered in any way. Fuck proxies.
 > This is good. Significantly reduces the surface area of possible attacks.
+
+## Understanding Pools
+
+If as a LP or staker you want to withdraw your funds, you'll first have to trigger a cooldown function and wait for it get over before you can withdraw your funds or even cancel your staking as a staker.
+
+In the following image it is not depicted properly, but the Pool Delegate also has to stake a shit ton of BPTs to be whitelisted as a Pool Delegate by the MapleDAO in the first place.
+
+![Users that can interact with a pool](https://user-images.githubusercontent.com/44272939/108764517-b457fa80-7520-11eb-9f32-73c09c278b92.png)
