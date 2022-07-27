@@ -1,9 +1,28 @@
-# TITS for DeFi
-### TITS: The International Testing Standard 
+# The International Testing Standard (TITS) for DeFi
 
-Testing of software is an extremely imaginative and cognitively demanding task, more so in DeFi.
+I believe that protocols need to be held to a higher standard of testing. Web3 protocols are decentralised, therefore there are no central authorities, and subsequently no regulatory pressure present to do quality checks on web3 software.
 
-Testing is an art form.
+Is this such a big issue?
+**YES**
+
+These softwares (DeFi protocols) handle the hard earned money of everyday Joes like you and me (and also money of stupid funds like 3AC, but yeah, you get the point) so, we cannot let the protocols continue with lax testing.
+
+It does not matter (much) how many auditors have had a stab at your protocol, you, as a developer, do not really understand if you protocol really works and is robust enough to take on the uncertainities of the real world if you have not tested your protocol thoroughly. 
+
+Therefore, with this repository, I aim to create a certain set of testing standards that all DeFi protocols should strive to meet.
+
+I plan to create this set of standards via iteration.
+Iteration of publicaly critiquing leading DeFi protocols that are in use today, so that the up and coming protocols in the same space can get an idea and inspiration for the level of testing that the entire community expects out of a protocol that claims to handle money.
+
+## List of protocols being evaluated
+
+1. [Maple Finance](https://github.com/saxenism/defi-tits/tree/master/Maple%20Finance)
+
+## Random tid bits about traditional testing that I have picked up...
+
+This is definitely not molded for web3 yet, but consider this a good starting point if you haven't formally studied [Software Engineering](https://www.youtube.com/playlist?list=PLbRMhDVUMngf8oZR3DpKMvYhZKga90JVt).
+
+Testing of software is an extremely imaginative and cognitively demanding task, more so in DeFi. So let your imagination go wild and gather ideas regarding testing from any walk of life, science, religion, parenting, social sciences, etc. Just about everything is fair game in testing.
 
 ## 1. Old wisdom related to testing
 
