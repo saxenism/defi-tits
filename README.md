@@ -1,5 +1,7 @@
 # The International Testing Standard (TITS) for DeFi
 
+## Mission Statement
+
 I believe that protocols need to be held to a higher standard of testing. Web3 protocols are decentralised, therefore there are no central authorities, and subsequently no regulatory pressure present to do quality checks on web3 software.
 
 Is this such a big issue?
