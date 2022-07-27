@@ -94,7 +94,7 @@ The LPs get LoanFDTs.
 
 > LoanFDTs are similar to LP Tokens as they represent a claim over a part of principal plus any proportional interest that gets generated. 
 
-> LoanFDTs that Maple is using isn't the same old ERC20, they are using a relatively unknown ERC222 standard. Need to check that thoroughly then.
+> LoanFDTs that Maple is using isn't the same old ERC20, they are using a relatively unknown ERC2222 standard. Need to check that thoroughly then.
 
 5. Borrowers can drawdown any amount that is both above the request Loan amount, and below the current balance of the `FundingLocker`. 
 
@@ -107,3 +107,13 @@ The LPs get LoanFDTs.
     + Drawdown minus fee is transferred to the Borrower
 
 7. Excess funds are sent to `Loan` contract to be claimed by the lenders. 
+
+8. Normally, interest is paid in constant amounts at regular intervals, and principal is returned on last repayment. Otherwise, you can also pay the entire remaining balance of the loan in one transaction including principal and the amount the interest that should be paid (we use a function called `PremiumCalc` here).
+
+9. Liquidations work as usual apart from the fact that you can only call it as a pool delegate if your equity in the loan is more than the `minLoanEquity`
+
+> This again will be interesting to test. Should already be heavily testsed.
+
+10. Another (unnatural) thing that Maple is doing in the Liquidation is that, post the calling of liquidation, they are taking the collateral from the `CollateralLocker` and converting it into the Borrow Asset using Uniswap and then transferring it to be to the `Loan` contract for being claimed by the lenders.
+
+> I don't understand why didn't Maple just let the lenders claim their share of the collateral in terms of collateral asset itself. Perhaps it has got to do something with the LoanFDT which is an ERC2222 instead of pure ERC20. Need to get more clarity here.
