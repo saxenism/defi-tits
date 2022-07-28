@@ -71,7 +71,7 @@ In the following image it is not depicted properly, but the Pool Delegate also h
 
 ![Users that can interact with a pool](https://user-images.githubusercontent.com/44272939/108764517-b457fa80-7520-11eb-9f32-73c09c278b92.png)
 
-## Understanding Loanss
+## Understanding Loans
 
 1. The Loan contracts are created by *Borrowers* out of the *LoanFactory* contracts, which are whitelisted in **MapleGlobals** to ensure that only certain types of *Loan* contracts are used in the protocol.
 
@@ -117,3 +117,28 @@ The LPs get LoanFDTs.
 10. Another (unnatural) thing that Maple is doing in the Liquidation is that, post the calling of liquidation, they are taking the collateral from the `CollateralLocker` and converting it into the Borrow Asset using Uniswap and then transferring it to be to the `Loan` contract for being claimed by the lenders.
 
 > I don't understand why didn't Maple just let the lenders claim their share of the collateral in terms of collateral asset itself. Perhaps it has got to do something with the LoanFDT which is an ERC2222 instead of pure ERC20. Need to get more clarity here.
+
+## MPL Token
+
+1. MPL token is the native token of Maple Protocol and it inherits:
++ [ERC20](https://github.com/ethereum/EIPs/issues/20) for standard token behavior
++ [ERC2222](https://github.com/ethereum/EIPs/issues/2222) for profit distribution of USDC from the Maple Treasury
+
+> Interestingly, the MPL token repo has only been audited by Peckshield. So, this token particularly must have stringent testing.
+
+> Also, what's more interesting is that the scope of Peckshield's audit is just *ERC20-compliance of the Maple token*
+
+> So, everyone already knows what ERC20 is, so let's skip it. But what's interesting...is the use of ERC2222 standard, which adds the functionality to represent claims on any type of crypto cash flow on top of ERC20 functionalities. Think of it like this standard enables dividend like payouts in crypto where token holders are treated akin to share holders and all withdrawals which is based on the proportion of the withdrawing party's MPL holdings is taken care of, by ERC2222.
+
+2. MPL token is used in the 50-50 MPL-USDC Balancer pool created during the protocol deployment and will be used in all other Balancer pools which will have BPTs used in StakeLockers.
+
+3. The MPL token recieves fee periodically from the Treasury (at the discretion of the Governor).
+> Basically funds are gathered in the Maple Treasury from all kinds of protocol fee, converted to USDC and sent to the MPL token contract.
+
+4. When MPL tokens are added as liquidity to the Balancer Pool, the Balancer pool is the owner of those tokens, which are accruing USDC interest (from the Maple treasury, read point 3). To account for this, the FDT (MPL token contract) has an additional function called `withdrawFundsOnBehalf` which allows for the following:
++ Claims USDC interest from MPL contract, transferring it into the Balancer pool contract address
++ The USDC supply increases and the MPL supply stays constant, increasing the implied value of MPL (since the buy pressure on MPL has increased)
+
+> Why did the buy pressure on MPL increase when the quantity of USDC increased in the MPL-USDC 50-50 balancer pool?
+
+> Well, because according to the constraints of the pool the quantity of both MPL and USDC must remain equal (50-50), and when the quantity of USDC is increased in the pool, the traders are incentivized to take out the excess USDC by supplying MPL. And to supply this MPL, they'll have to buy it from some DEX/CEX.
