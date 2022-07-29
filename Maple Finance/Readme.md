@@ -118,7 +118,7 @@ The LPs get LoanFDTs.
 
 > I don't understand why didn't Maple just let the lenders claim their share of the collateral in terms of collateral asset itself. Perhaps it has got to do something with the LoanFDT which is an ERC2222 instead of pure ERC20. Need to get more clarity here.
 
-## MPL Token
+## Understanding MPL Token
 
 1. MPL token is the native token of Maple Protocol and it inherits:
 + [ERC20](https://github.com/ethereum/EIPs/issues/20) for standard token behavior
@@ -142,3 +142,43 @@ The LPs get LoanFDTs.
 > Why did the buy pressure on MPL increase when the quantity of USDC increased in the MPL-USDC 50-50 balancer pool?
 
 > Well, because according to the constraints of the pool the quantity of both MPL and USDC must remain equal (50-50), and when the quantity of USDC is increased in the pool, the traders are incentivized to take out the excess USDC by supplying MPL. And to supply this MPL, they'll have to buy it from some DEX/CEX.
+
+## Understanding Pool Cover
+
+1. Simple Concept.
++ Lender funds need to be protected in case of a loan default
++ This protection(cover) is provided by volunteers. How can they do this?
++ Well, first they have to add liquidity to the MPL-USDC 50-50 Balancer Pool and get Balancer Pool Tokens (BPTs). Users can also directly buy these tokens.
++ Now every pool has a `stakeLocker` where these users can stake their BPT tokens and get StakeLockerFDTs in return.
++ Users use these StakeLockerFDTs to claim all future interest, since Pools reward the StakeLockers with a portion of the revenue generated in compensation for assuming more risk.
++ And at the time of liquidation, if these tokens are enough to compensate the lenders for the difference between the collateral required and pending repayments, then these users get the remaining BPTs, else, tata, bye bye.
+
+>  The actual calculation of the minimum amount needed to compensate the lenders is a bit complicated (atleast looks complicated), since it requires you to be a little familiar with the Balancer protocol too.
+
+> Need to study, understand and potentially test this calculation.
+
+## Understanding Lockers
+
+1. Dedicated smart contracts to hold custody assets. They're kinda paranoid. I like this.
+> Ok, no they are not paranoid. It'll be holding assets only in the v1. In later version it is supposed to all sorts of weird things.
+2. Lockers and what they hold:
++ LiquidityLocker: asset used for liquidity for funding Loans
++ DebtLocker: Holds custody of LoanFDTs (to claim revenue and make liquidation calls)
++ StakeLocker: BPTs (used as a reserve to cover losses from defaulted Loans)
++ FundingLocker: Asset that will be borrowed during the funding period (pre-drawdown)
++ CollateralLocker: Collateral (against any loan)
+
+3. In order for any new Locker strategy to be implemented, its corresponding Factory must be whitelisted in MapleGlobals using `setValidSubFactory`
+
+## Understanding Oracles
+
+1. Chainlink oracles are used as price feeds.
+2. An oracle wrapper contract acts as a safeguard against oracle downtime. 
+> I think a better solution would have been to have two oracle integrations (both Chainlink and Uni) so that if one fails, we always have the second one to fall back on. 
+
+> and yeah, even after those two, we could have had a oracle wrapper contract as a safeguard against orale downtime.
+3. For USDC prices, a constant USD oracle will be deployed, with a constant price of 1 * 10 ** 8. 
+> Note that USDC has 6 decimals only but Chainlink price feeds use 8 decimals of precision
+
+4. Planning for a zombie apocalype:
++ Oracle wrappers have the capability to provide a manual price in the event of an oracle outage, using the security multisig. In all other cases, it will simply pass through the value from getLatestPrice in the Chainlink oracle.
