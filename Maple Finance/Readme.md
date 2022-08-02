@@ -182,3 +182,25 @@ The LPs get LoanFDTs.
 
 4. Planning for a zombie apocalype:
 + Oracle wrappers have the capability to provide a manual price in the event of an oracle outage, using the security multisig. In all other cases, it will simply pass through the value from getLatestPrice in the Chainlink oracle.
+
+
+
+## ERC 2222 Working Mechanism: Example
+
+Would be really cool and prolly helpful, if you go through this example and actually understand it.
+
+### Normal functioning of FDTs
+
+[Link](https://github.com/maple-labs/maple-core/wiki/FundsDistributionToken-(FDT,-ERC2222))
+
+### Functioning of ExtendedFDTs
+
+These FDTs are extending the functionality of FDT to include functionality to account for **losses that must also be distributed** for liquidity providers and staker.
+
+For Pools, it happens in the case when a loan has defaulted, all the BPTs are burnt and still there is a deficit.
+
+For Stakers(StakeLocker), it happens in the case when a loan has defaulted and any number of BPTs are burnt.
+
+Formulae used for accounting for losses are the exact same as normal FDTs. Check them out.
+
+[Link](https://github.com/maple-labs/maple-core/wiki/ExtendedFDT)
