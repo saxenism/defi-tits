@@ -204,3 +204,23 @@ For Stakers(StakeLocker), it happens in the case when a loan has defaulted and a
 Formulae used for accounting for losses are the exact same as normal FDTs. Check them out.
 
 [Link](https://github.com/maple-labs/maple-core/wiki/ExtendedFDT)
+
+## Handling custodial ownership using ERC2258
+
+Another awesome ERC that Maple brings to light is the ERC2258, which allows tokens to be custodied by an entity such that they cannot be transferred/redeemed for underlying liquidity, yet allow the rightful owner to retain all future benefits and all losses.
+
+Example:
+It allows users to stake PoolFDTs in the MplRewards contract without changing their PoolFDT ERC-20 balance. This allows them to earn MPL rewards in the MplRewards contract, while simultaneously accruing interest earned by the Pool. This would not have been possible with the original SNX-fork of the liquidity mining contract, since in that implementation, all Pool interest would have been accrued to the MplRewards contract itself, since it would hold a balance of PoolFDTs
+
+This of it like pledging your stonks to someone.
+
+> Need to test this a bit.. can we transfer funds after giving custody and so on...
+
+## Invariant
+
+This equation must always be satisfied:
+
+```
+liquidityLockerBal + principalOut = fdtTotalSupply + interestSum - poolLosses
+```
+
