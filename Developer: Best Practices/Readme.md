@@ -1,4 +1,4 @@
-## Foreword
+# General Philosophy
 
 Smart contract programming requires a different engineering mindset than what you may be used to.
 
