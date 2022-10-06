@@ -36,3 +36,13 @@ It is therefore not enough to defend against known vulnerabilities. Instead you 
 + Beware of external calls. Private data is not actually private and public functions can be called by anyone in any order.
 + Prefer reusing contract code only when you have proven previously-deployed contracts which you own. Otherwise go for duplication of code.
     > Efforts such as OpenZeppelin's Solidity Library seek to provide patterns such that secure code can be re-used without duplication
+
+# Development best practices:
+
++ External calls are very risky. 
+    + Try and avoid doing that, prefer duplicating code over using a call to an external contract. 
+    + And when you absolutely have to do that, make sure that the contract is owned/maintained/managed by a trusted party. 
+    + Always mark your function making external calls as unsafe via comments and naming convention
+    + Avoid making state changes after the external call. The usual *re-entrancy attack* and following the *check-effects-interactions* pattern circus.
+
++ 
